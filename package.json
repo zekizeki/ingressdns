@@ -1,0 +1,18 @@
+{
+  "name": "ingressdns",
+  "version": "0.0.1",
+  "description": "Service that polls a kubernetes API and gets a list of ingress controlle endpoints and add them to consul",
+  "main": "app.js",
+  "dependencies": {
+    "http": "0.0.0",
+    "nodejs-etcd": "^0.1.1",
+    "repeat": "0.0.6",
+    "request": "^2.71.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

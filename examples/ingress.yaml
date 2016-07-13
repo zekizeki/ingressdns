@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test
+spec:
+  rules:
+  - host: foo.bar.service.consul
+    http:
+      paths:
+      - path: /webtest1
+        backend:
+          serviceName: webtest1
+          servicePort: 80
+      - path: /webtest2
+        backend:
+          serviceName: webtest2
+          servicePort: 80
+  - host: foo2.bar.service.consul

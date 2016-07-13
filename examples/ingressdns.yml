@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: router
+spec:
+  replicas: 1
+  selector:
+    name: router
+  template:
+    metadata:
+      labels:
+        name: router
+    spec:
+      containers:
+      - name: ingressdns
+        image: zekizeki/ingressdns:0.0.1
+        env:
+          - name: KUBE_API_URL
+            value: "http://kubernetes/api"
+          - name: DOMAIN
+            value: service.consul
+          - name: CONSUL_API_ADDRESS
+            value: http://localhost:8500/v1/agent/service/register
