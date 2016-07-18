@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: ingressdns
-        image: zekizeki/ingressdns:0.0.1
+        image: zekizeki/ingressdns:0.0.2
         env:
           - name: KUBE_API_URL
             value: "http://kubernetes"
