@@ -23,7 +23,7 @@ spec:
         image: zekizeki/ingressdns:0.0.1
         env:
           - name: KUBE_API_URL
-            value: "http://kubernetes/api"
+            value: "http://kubernetes"
           - name: DOMAIN
             value: service.consul
           - name: CONSUL_API_ADDRESS
