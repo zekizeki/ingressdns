@@ -41,4 +41,13 @@ The host name used in an ingress must be made up of 4 portions and end in servic
 
 e.g.    myservice.myenv.service.consul
 
+an option HOST_REGEX env variable may be passed to add extra validation around the hostname used in an ingress. If the regex is not matched the host name will not be added to consul.
+
+e.g. The following would validate that the host name used only used alpha numerics and ended with service.consul
+
+```
+- name: HOST_REGEX
+  value: '^[aA0-zZ9]*\.[aA0-zZ9]*\.service.consul$'
+```
+
 
