@@ -13,9 +13,10 @@ var KUBE_API_URL = process.env.KUBE_API_URL || 'https://'+KUBERNETES_SERVICE_HOS
 var KUBE_API = KUBE_API_URL +'/apis/extensions/v1beta1/ingresses';
 var KUBE_API_USER = process.env.KUBE_API_USER || '';
 var KUBE_API_PASSWORD = process.env.KUBE_API_PASSWORD || '';
-var CONSUL_API_ADDRESS = process.env.CONSUL_API_ADDRESS || 'http://kubernetes';
+var CONSUL_API_ADDRESS = process.env.CONSUL_API_ADDRESS || 'http://localhost:8500';
 var CONSUL_API_TOKEN = process.env.CONSUL_API_TOKEN;
 var DOMAIN =  process.env.DOMAIN || 'service.consul';
+var HOST_REGEX = process.env.HOST_REGEX;
 
 // call the kubernetes API and get the list of ingresses tagged
 function checkIngressList() {
@@ -161,6 +162,15 @@ function publishServiceToConsul(service){
     if(labels.length != 4) {
       console.log("hostnames must be made up of 4 labels e.g. label1.label2."+DOMAIN);
       return;
+    }
+    
+    // Use additional user provided regex to validate host if present
+    if(typeof(HOST_REGEX)!== 'undefined') {
+      var regex = new RegExp(HOST_REGEX);
+      if (!regex.test(service.host)) {
+        console.log("Hostname does not match the validation expresssion "+HOST_REGEX);
+        return;
+      } 
     }
   
     var consulSvc = {
